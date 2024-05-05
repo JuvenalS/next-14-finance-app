@@ -1,5 +1,5 @@
 import { useFormatCurrency } from "@/hooks/use-format-currency";
-import { HandCoins, Landmark, PiggyBank, Wallet } from "lucide-react";
+import { HandCoins, Wallet, Landmark, PiggyBank } from "lucide-react";
 
 export default function TransactionItem({
   type,
@@ -25,12 +25,9 @@ export default function TransactionItem({
       colors: "text-yellow-500 dark:text-yellow-400",
     },
   };
-
   const IconComponent = typesMap[type].icon;
   const colors = typesMap[type].colors;
-
   const formattedAmount = useFormatCurrency(amount);
-
   return (
     <div className="w-full flex items-center">
       <div className="flex items-center mr-4 grow">
@@ -47,7 +44,8 @@ export default function TransactionItem({
       </div>
 
       <div className="min-w-[70px] text-right">{formattedAmount}</div>
-      <div className="min-w-[50px] flex justify-end">...</div>
+
+      <div className="min-w-[50px] flex justify-end">···</div>
     </div>
   );
 }

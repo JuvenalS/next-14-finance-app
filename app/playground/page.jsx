@@ -4,7 +4,7 @@ import TransactionItem from "@/components/transaction-item";
 import TransactionSummaryItem from "@/components/transaction-summary-item";
 import Button from "@/components/button";
 import Label from "@/components/label";
-import Input from "@/components/inputs";
+import Input from "@/components/input";
 import Select from "@/components/select";
 import Separator from "@/components/separator";
 import Skeleton from "@/components/skeleton";

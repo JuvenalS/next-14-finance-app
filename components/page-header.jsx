@@ -12,6 +12,7 @@ export default function PageHeader({ className }) {
       >
         Finance App
       </Link>
+
       <div className="flex items-center space-x-4">
         <DarkModeToggle defaultMode={theme} />
         <div>User Dropdown</div>

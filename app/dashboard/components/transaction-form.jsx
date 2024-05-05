@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/button";
-import Input from "@/components/inputs";
+import Input from "@/components/input";
 import Label from "@/components/label";
 import Select from "@/components/select";
 import { categories, types } from "@/lib/consts";

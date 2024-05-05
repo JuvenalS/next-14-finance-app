@@ -19,7 +19,6 @@ export default function Trend({ type, amount, prevAmount }) {
     () => calcPercentageChange(amount, prevAmount).toFixed(0),
     [amount, prevAmount]
   );
-
   const formattedAmount = useFormatCurrency(amount);
 
   return (
@@ -35,7 +34,7 @@ export default function Trend({ type, amount, prevAmount }) {
         {percentageChange > 0 && (
           <ArrowUpRight className="text-green-700 dark:text-green-300" />
         )}
-        {percentageChange}% vs last period
+        <div>{percentageChange}% vs last period</div>
       </div>
     </div>
   );
