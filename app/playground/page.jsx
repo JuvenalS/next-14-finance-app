@@ -1,18 +1,23 @@
-import Button from "@/components/button";
-import Input from "@/components/inputs";
-import Label from "@/components/label";
+import Trend from "@/components/trend";
 import PageHeader from "@/components/page-header";
+import TransactionItem from "@/components/transaction-item";
+import TransactionSummaryItem from "@/components/transaction-summary-item";
+import Button from "@/components/button";
+import Label from "@/components/label";
+import Input from "@/components/inputs";
 import Select from "@/components/select";
 import Separator from "@/components/separator";
 import Skeleton from "@/components/skeleton";
-import TransactionItem from "@/components/transaction-item";
-import TransactionSummaryItem from "@/components/transaction-summary-item";
-import Trend from "@/components/trend";
+
+export const metadata = {
+  title: "Playground",
+};
 
 export default function Page() {
   return (
     <main className="space-y-8 mb-44">
       <h1 className="text-4xl mt-8">Playground</h1>
+
       <div>
         <h2 className="mb-4 text-lg font-mono">PageHeader</h2>
         <Separator />
@@ -40,7 +45,7 @@ export default function Page() {
           <TransactionItem
             type="Expense"
             category="Food"
-            description="Going out to ear"
+            description="Going out to eat"
             amount={29}
           />
           <TransactionItem
@@ -68,7 +73,7 @@ export default function Page() {
           <TransactionItem
             type="Expense"
             category="Food"
-            description="Going out to ear"
+            description="Going out to eat"
             amount={29}
           />
           <TransactionItem
