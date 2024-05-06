@@ -22,7 +22,6 @@ export default function TransactionForm() {
     mode: "onTouched",
     resolver: zodResolver(transactionSchema),
   });
-
   const router = useRouter();
   const [isSaving, setSaving] = useState(false);
 
