@@ -10,7 +10,6 @@ import { useState } from "react";
 
 export default function TransactionList({ range, initialTransactions }) {
   const [transactions, setTransactions] = useState(initialTransactions);
-  const [offset, setOffset] = useState(initialTransactions.length);
   const [buttonHidden, setButtonHidden] = useState(
     initialTransactions.length === 0
   );
@@ -18,13 +17,12 @@ export default function TransactionList({ range, initialTransactions }) {
 
   const grouped = groupAndSumTransactionsByDate(transactions);
 
-  const handleClick = async (e) => {
+  const handleClick = async () => {
     setLoading(true);
     let nextTransactions = null;
     try {
-      nextTransactions = await fetchTransactions(range, offset, 10);
+      nextTransactions = await fetchTransactions(range, transactions.length, 10);
       setButtonHidden(nextTransactions.length === 0);
-      setOffset((prevValue) => prevValue + 10);
       setTransactions((prevTransactions) => [
         ...prevTransactions,
         ...nextTransactions,
@@ -33,6 +31,10 @@ export default function TransactionList({ range, initialTransactions }) {
       setLoading(false);
     }
   };
+
+  const handleRemoved = (id) => () => {
+    setTransactions(prev => [...prev].filter(t => t.id !== id))
+  }
 
   return (
     <div className="space-y-8">
@@ -43,7 +45,7 @@ export default function TransactionList({ range, initialTransactions }) {
           <section className="space-y-4">
             {transactions.map((transaction) => (
               <div key={transaction.id}>
-                <TransactionItem {...transaction} />
+                <TransactionItem {...transaction} onRemoved={handleRemoved(transaction.id)} />
               </div>
             ))}
           </section>
