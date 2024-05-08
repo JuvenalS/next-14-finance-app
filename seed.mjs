@@ -18,13 +18,44 @@ const categories = [
   "Other",
 ];
 
+async function seedUsers() {
+  for (let i = 0; i < 5; i++) {
+    try {
+      const { error } = await supabase.auth.admin.createUser({
+        email: faker.internet.email(),
+        password: "password",
+      });
+    if (error) {
+      throw new Error(error)
+    }
+    console.log(`user added`)
+    } catch (error) {
+      console.error(`Error adding user`);
+    }
+  }
+}
+
 async function seed() {
+  await seedUsers();
   let transactions = [];
 
-  for (let i = 0; i < 10; i++) {
+  const {
+    data: { users },
+    error: listUsersError,
+  } = await supabase.auth.admin.listUsers();
+
+  if (listUsersError) {
+    console.error(`Cannot list users, aborting`)
+    return
+  }
+
+  const userIds = users?.map(user => user.id)
+
+  for (let i = 0; i < 100; i++) {
     const created_at = faker.date.past();
     let type,
       category = null;
+    const user_id = faker.helpers.arrayElement(userIds)
 
     const typeBias = Math.random();
 
@@ -66,6 +97,7 @@ async function seed() {
       type,
       description: faker.lorem.sentence(),
       category,
+      user_id,
     });
   }
 
@@ -74,7 +106,7 @@ async function seed() {
   if (error) {
     console.error("Error inserting data");
   } else {
-    console.log("Data inserted");
+    console.log(`${transactions.length} transactions stored`);
   }
 }
 
